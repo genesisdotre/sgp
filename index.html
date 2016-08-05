@@ -67,32 +67,36 @@
         });
     });
 
-    app.controller("ListCtrl", function($scope) {
-
-      $scope.files = [
-"R0010746_ok",
-"R0010749_ok",
-"R0010753_ok",
-"R0010757_ok",
-"R0010760_ok",
-"R0010761_ok",
-"R0010768_pl",
-"R0010769_ok",
-"R0010789_ok",
-"R0010799_ok",
-"R0010802_ok",
-"R0010806_ok",
-"R0010815_ok",
-"R0010818_ok",
-"R0010819_ok",
-"R0010821_ok",
-"R0010826_ok",
-"R0010830_ok",
-"R0010838_ok",
-"R0010840_ok",
-"R0010842_ok",
-"R0010848_ok"
+    app.service("files", function() {
+      return [
+        "R0010746_ok",
+        "R0010749_ok",
+        "R0010753_ok",
+        "R0010757_ok",
+        "R0010760_ok",
+        "R0010761_ok",
+        "R0010768_pl",
+        "R0010769_ok",
+        "R0010789_ok",
+        "R0010799_ok",
+        "R0010802_ok",
+        "R0010806_ok",
+        "R0010815_ok",
+        "R0010818_ok",
+        "R0010819_ok",
+        "R0010821_ok",
+        "R0010826_ok",
+        "R0010830_ok",
+        "R0010838_ok",
+        "R0010840_ok",
+        "R0010842_ok",
+        "R0010848_ok"
       ];
+    })
+
+    app.controller("ListCtrl", function($scope, files) {
+
+      $scope.files = files;
 
     });
 
