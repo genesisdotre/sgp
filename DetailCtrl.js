@@ -33,14 +33,16 @@ app.controller("DetailCtrl", function($routeParams, $scope) {
   var sphereMaterial = new THREE.MeshBasicMaterial();
 
 
-  var manager = new THREE.LoadingManager();
-  manager.onProgress = function ( item, loaded, total ) {
-    console.log(item, loaded, total);
-    //progressBar.style.width = (loaded / total * 100) + '%';
+  var onProgress = function ( xhr ) {
+    if ( xhr.lengthComputable ) {
+      var percentComplete = xhr.loaded / xhr.total * 100;
+      console.log( Math.round(percentComplete, 2) + '% downloaded' );
+    }
   };
-  var loader = new THREE.TextureLoader(manager);
-  var texture1 = loader.load("big/" + $routeParams.img + ".JPG");
-  sphereMaterial.map = texture1;
+
+  var loader = new THREE.TextureLoader();
+  var texture = loader.load("big/" + $routeParams.img + ".JPG", undefined, onProgress);
+  sphereMaterial.map = texture;
 
   // geometry + material = mesh (actual object)
   var sphereMesh = new THREE.Mesh(sphere, sphereMaterial);
