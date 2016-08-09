@@ -1,6 +1,6 @@
-app.controller("DetailCtrl", function($routeParams, $scope, overlay) {
+app.controller("DetailCtrl", function($location, $scope, overlay) {
 
-  $scope.img = "big/" + $routeParams.big;
+  $scope.img = $location.search().url
 
   $scope.$on("$destroy", function() {
     renderer.domElement.remove()

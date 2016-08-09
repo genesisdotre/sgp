@@ -42,32 +42,36 @@
   </head>
   <body  ng-app="app">
     
-    <div ng-view></div>
+    <div ui-view></div>
 
   </body>
 
-  <script src="angular.js"></script>
-  <script src="angular-route.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.js"></script>
+  <script src="angular-ui-router.min.js"></script>
+
   <script src="three.min.js"></script>
   <script src="lib/iosOverlay/iosOverlay.js"></script>
   <script src="lib/iosOverlay/spin.min.js"></script>
   
   <script type="text/javascript">
-    var app = angular.module("app", ["ngRoute"]);
+    var app = angular.module("app", ["ui.router"]);
 
-    app.config(function ($routeProvider, $locationProvider) {
-      $routeProvider
-        .when('/', {
+    app.config(function ($stateProvider, $urlRouterProvider) {
+      $stateProvider
+        .state('/list', {
+          url: '',
           templateUrl: 'list.html',
           controller: 'ListCtrl',
         })
-        .when('/big/:img', {
+        .state('/image', {
+          url: '/image',
           templateUrl: 'detail.html',
           controller: 'DetailCtrl',
-        })
-        .otherwise({
-          redirectTo: '/'
         });
+    });
+
+    app.filter('encode', function() {
+      return window.encodeURIComponent;
     });
 
     app.service("files", function() {
@@ -97,7 +101,9 @@
       ];
     })
 
-    app.controller("ListCtrl", function($rootScope, $scope, files) {
+    app.controller("ListCtrl", function($rootScope, $location, $scope, files) {
+
+      console.log($location.search("url"));
 
       $rootScope.files = $rootScope.files || files;
 
