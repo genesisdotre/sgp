@@ -1,4 +1,4 @@
-app.controller("DetailCtrl", function($routeParams, $scope) {
+app.controller("DetailCtrl", function($routeParams, $scope, overlay) {
 
   THREE.ImageUtils.crossOrigin = '';
 
@@ -32,16 +32,21 @@ app.controller("DetailCtrl", function($routeParams, $scope) {
   // creation of the sphere material
   var sphereMaterial = new THREE.MeshBasicMaterial();
 
+  var onLoad = function() {
+    overlay.hide();
+  };
 
   var onProgress = function ( xhr ) {
     if ( xhr.lengthComputable ) {
-      var percentComplete = xhr.loaded / xhr.total * 100;
-      console.log( Math.round(percentComplete, 2) + '% downloaded' );
+      var percentComplete = Math.round(xhr.loaded / xhr.total * 100, 2) + "%";
+      overlay.update(percentComplete);
+      console.log(percentComplete);
     }
   };
 
+  overlay.loading();
   var loader = new THREE.TextureLoader();
-  var texture = loader.load("big/" + $routeParams.img + ".JPG", undefined, onProgress);
+  var texture = loader.load("big/" + $routeParams.img + ".JPG", onLoad, onProgress);
   sphereMaterial.map = texture;
 
   // geometry + material = mesh (actual object)
