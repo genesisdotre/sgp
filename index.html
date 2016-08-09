@@ -61,7 +61,7 @@
           templateUrl: 'list.html',
           controller: 'ListCtrl',
         })
-        .when('/:img', {
+        .when('/big/:img', {
           templateUrl: 'detail.html',
           controller: 'DetailCtrl',
         })
@@ -72,40 +72,41 @@
 
     app.service("files", function() {
       return [
-        "R0010746_ok",
-        "R0010749_ok",
-        "R0010753_ok",
-        "R0010757_ok",
-        "R0010760_ok",
-        "R0010761_ok",
-        "R0010768_pl",
-        "R0010769_ok",
-        "R0010789_ok",
-        "R0010799_ok",
-        "R0010802_ok",
-        "R0010806_ok",
-        "R0010815_ok",
-        "R0010818_ok",
-        "R0010819_ok",
-        "R0010821_ok",
-        "R0010826_ok",
-        "R0010830_ok",
-        "R0010838_ok",
-        "R0010840_ok",
-        "R0010842_ok",
-        "R0010848_ok"
+        {"small": "small/R0010746_ok.jpg", "big": "big/R0010746_ok.JPG"},
+        {"small": "small/R0010749_ok.jpg", "big": "big/R0010749_ok.JPG"},
+        {"small": "small/R0010753_ok.jpg", "big": "big/R0010753_ok.JPG"},
+        {"small": "small/R0010757_ok.jpg", "big": "big/R0010757_ok.JPG"},
+        {"small": "small/R0010760_ok.jpg", "big": "big/R0010760_ok.JPG"},
+        {"small": "small/R0010761_ok.jpg", "big": "big/R0010761_ok.JPG"},
+        {"small": "small/R0010768_pl.jpg", "big": "big/R0010768_pl.JPG"},
+        {"small": "small/R0010769_ok.jpg", "big": "big/R0010769_ok.JPG"},
+        {"small": "small/R0010789_ok.jpg", "big": "big/R0010789_ok.JPG"},
+        {"small": "small/R0010799_ok.jpg", "big": "big/R0010799_ok.JPG"},
+        {"small": "small/R0010802_ok.jpg", "big": "big/R0010802_ok.JPG"},
+        {"small": "small/R0010806_ok.jpg", "big": "big/R0010806_ok.JPG"},
+        {"small": "small/R0010815_ok.jpg", "big": "big/R0010815_ok.JPG"},
+        {"small": "small/R0010818_ok.jpg", "big": "big/R0010818_ok.JPG"},
+        {"small": "small/R0010819_ok.jpg", "big": "big/R0010819_ok.JPG"},
+        {"small": "small/R0010821_ok.jpg", "big": "big/R0010821_ok.JPG"},
+        {"small": "small/R0010826_ok.jpg", "big": "big/R0010826_ok.JPG"},
+        {"small": "small/R0010830_ok.jpg", "big": "big/R0010830_ok.JPG"},
+        {"small": "small/R0010838_ok.jpg", "big": "big/R0010838_ok.JPG"},
+        {"small": "small/R0010840_ok.jpg", "big": "big/R0010840_ok.JPG"},
+        {"small": "small/R0010842_ok.jpg", "big": "big/R0010842_ok.JPG"},
+        {"small": "small/R0010848_ok.jpg", "big": "big/R0010848_ok.JPG"}
       ];
     })
 
-    app.controller("ListCtrl", function($scope, files) {
+    app.controller("ListCtrl", function($rootScope, $scope, files) {
 
-      $scope.files = files;
+      $rootScope.files = $rootScope.files || files;
 
     });
 
   </script>
   <script src="DetailCtrl.js"></script>
   <script src="overlay.js"></script>
+  <script src="viewer.js"></script>
   <!-- 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r69/three.min.js"></script> 
   -->
